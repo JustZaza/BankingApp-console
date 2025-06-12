@@ -66,10 +66,7 @@ public class Main {
                 System.out.println(bank.getAccountHolder());
                 System.out.println(bank.getAccountNumber());
                 System.out.println(bank.getBalance());
-
         }
         
     }
 }
-
-//For the withdrawal case, i want it to subtract the money withdrew from the balance. And then when viewing the balance again, it should be subtracted.
