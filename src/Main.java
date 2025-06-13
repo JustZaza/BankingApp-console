@@ -24,6 +24,7 @@ public class Main {
 
     public static void main(String[] args) {
 
+        boolean running = true;
         System.out.println("Hello Banker. How can we help you today?");
 
         System.out.println("Please enter account details:");
@@ -38,35 +39,41 @@ public class Main {
         System.out.println("Balance: ");
         double balance = sc.nextDouble();
         bank.setBalance(balance);
-
-
-        System.out.print("1: Deposit money into account.\n2: Withdraw money from account\n3: View Balance.\n\n>>>");
-        int optionSelected = sc.nextInt();
-        options(optionSelected);
+        options();
     }
     
-    static void options(int selected){
-        switch (selected){
-            case 1:
-                System.out.println(bank.getDeposit());
-                break;
-            case 2:
-                System.out.print("Enter amount to withdraw: ");
-                double withdraw = sc.nextDouble();
+    static void options() {
+        boolean running = true;
+        while (running) {
+            System.out.print("1: Deposit money into account.\n2: Withdraw money from account\n3: View Balance.\n4: Exit\n\n>>>");
+            int choice = sc.nextInt();
+            switch (choice) {
+                case 1:
+                    System.out.print("Enter amount to deposit: \nR");
+                    bank.deposit(sc.nextDouble());
+                    break;
+                case 2:
+                    System.out.print("Enter amount to withdraw: \nR");
+                    bank.withdraw(sc.nextDouble());
+                    break;
+                case 3:
+                    bank.viewDetails();
+                    break;
+                case 4:
+                    System.out.println("Thank you for using our bank.");
+                    running = false;
+                    break;
+//                    System.out.println("Do you want to do another transaction? Y/N");
+//                    String answer = sc.nextLine();
+//                    if (answer.equalsIgnoreCase("y")) {
+//                        running = true;
+//                    } else {
+//                        running = false;
+//                    }
 
-                if (bank.getBalance() < 0){
-                    System.out.println("Insufficient Funds!");
-                } else {
-                    System.out.println("Withdrawal Successful!");
-                    double total = bank.getBalance() - withdraw;
-                    bank.setBalance(total);
-                }
-
-            case 3:
-                System.out.println(bank.getAccountHolder());
-                System.out.println(bank.getAccountNumber());
-                System.out.println(bank.getBalance());
+                default:
+                    System.out.println("Invalid choice");
+            }
         }
-        
     }
 }

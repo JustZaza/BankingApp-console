@@ -2,11 +2,11 @@ public class BankAccount {
     private String accountNumber;
     private String accountHolder;
     private double balance;
-    private int depositIn;
+    private double depositIn;
 
     BankAccount(){}
 
-    public BankAccount(String accountNumber, String accountHolder, double balance, int depositIn){
+    public BankAccount(String accountNumber, String accountHolder, double balance, double depositIn){
         this.accountNumber = accountNumber;
         this.accountHolder = accountHolder;
         this.balance = balance;
@@ -33,7 +33,7 @@ public class BankAccount {
         return this.balance;
     }
 
-    int getDeposit() {
+    double getDeposit() {
         return depositIn;
     }
 
@@ -41,20 +41,36 @@ public class BankAccount {
         this.balance=balance;
     }
 
-    void setDeposit(int depositIn) {
+    void setDeposit(double depositIn) {
         this.depositIn = depositIn;
     }
 
-    static void deposit(){
-
+    void deposit(double deposit){
+        if (deposit < 10){
+            System.out.println("You cannot deposit less than R10.");
+        } else {
+            System.out.println("Deposit accepted!!");
+            double total = deposit + getBalance();
+            setBalance(total);
+            System.out.println("Money deposited: " + getDeposit() +"\n");
+            System.out.println("Current Balance: R" + (getBalance()) +"\n");
+        }
     }
 
-    static void withdraw() {
-
+    void withdraw(double withdraw) {
+        if (getBalance() < 0){
+            System.out.println("Insufficient Funds!");
+        } else {
+            System.out.println("Withdrawal Successful!");
+            double total = getBalance() - withdraw;
+            setBalance(total);
+        }
     }
 
-    static void viewDetails() {
-
+    void viewDetails() {
+        System.out.println(getAccountHolder());
+        System.out.println(getAccountNumber());
+        System.out.println(getBalance());
     }
 }
 //The deposit method should allow deposits and balance
